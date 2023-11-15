@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 class CourseController extends Controller
 {
    public function index(){
-    //C¢digo para listar os cursos
+    //Recuperar os registros do banco
+    $courses = Course::orderByDesc('created_at')->paginate(1);
     //Carrega a view
-    return view('courses.index');
+    return view('courses.index', ['courses' => $courses]);
    }
 
    public function show(){

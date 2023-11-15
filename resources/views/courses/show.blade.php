@@ -9,7 +9,7 @@
 <body>
     <h2>Detalhes do Curso</h2>
     @if (session('sucess'))
-        <p style="color #082">
+        <p style="color: #082">
             {{session('sucess')}}
         </p>
     @endif
