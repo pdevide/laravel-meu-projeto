@@ -9,15 +9,17 @@ class CourseController extends Controller
 {
    public function index(){
     //Recuperar os registros do banco
-    $courses = Course::orderByDesc('created_at')->paginate(1);
+    $courses = Course::orderByDesc('created_at')->paginate(10);
     //Carrega a view
     return view('courses.index', ['courses' => $courses]);
    }
 
-   public function show(){
+   public function show(Request $request){
 
     //detalhes do curso
-    return view('courses.show');
+    $course = Course::where('id', $request->courseId)->first();
+
+    return view('courses.show', ['course' => $course]);
    }
    public function create(){
 
