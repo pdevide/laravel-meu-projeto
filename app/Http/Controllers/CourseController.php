@@ -43,11 +43,11 @@ class CourseController extends Controller
     {
 
         // Cadastrar no banco de dados na tabela cursos os valores de todos os campos
-        Course::create($request->all());
+        $course = Course::create($request->all());
         //Course::create([ 'name' => $request->name]);
 
         // Redirecionar o usu rio, enviar a mensagem de sucesso
-        return redirect()->route('course.show')->with('success', 'Curso cadastrado com sucesso!');
+        return redirect()->route('course.show', ['course' => $course->id])->with('success', 'Curso cadastrado com sucesso!');
     }
 
     // Carregar o formul rio editar curso
@@ -73,8 +73,13 @@ class CourseController extends Controller
     }
 
     // Excluir o curso do banco de dados
-    public function destroy()
+    public function destroy(Course $course)
     {
-        dd("Excluir o curso do banco de dados");
+        // Excluir o registro do banco de dados
+        // dd($course->id);
+        $course->delete();
+
+        // Redirecionar o usu rio, enviar a mensagem de sucesso
+        return redirect()->route('course.index')->with('success', 'Curso exclu¡do com sucesso!');
     }
 }

@@ -10,9 +10,18 @@
 
 <body>
 
-    <a href="{{ route('course.index')}}">Listar</a><br>
-    <a href="{{ route('course.edit', ['course' => $course->id ])}}">Editar</a><br>
-    {{-- <a href="{{ route('course.destroy')}}">Apagar</a><br> --}}
+    <a href="{{ route('course.index')}}">
+        <button type="button">Listar</button>
+    </a><br><br>
+    <a href="{{ route('course.edit', ['course' => $course->id ])}}">
+        <button type="button">Editar</button>
+    </a><br><br>
+
+    <form method="POST" action="{{ route('course.destroy', ['course' => $course->id])}}">
+        @csrf
+        @method('delete')
+        <button type="submit" onclick="return confirm('Tem certeza que deseja apagar este registro?')">Apagar</button>
+    </form>
 
     <h2>Detalhes do Curso</h2>
 
